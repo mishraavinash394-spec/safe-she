@@ -18,7 +18,22 @@ alert("Please fill all fields");
 return;
 
 }
+if(phone.length != 10){
 
+    alert("Please enter a valid 10-digit phone number");
+
+    return;
+
+}
+let exists = contacts.find(contact => contact.phone === phone);
+
+if(exists){
+
+    alert("This contact already exists.");
+
+    return;
+
+}
 contacts.push({
 
 name:name,

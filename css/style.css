@@ -682,4 +682,88 @@ cursor:pointer;
 
 .logout-btn:hover{
     background:#0A2647;
+}.contact-page{
+
+    width:450px;
+
+    margin:50px auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 20px rgba(0,0,0,.15);
+
+    text-align:center;
+
+}
+
+.contact-page input{
+
+    width:100%;
+
+    padding:12px;
+
+    margin:10px 0;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+}
+
+.contact-page button{
+
+    width:100%;
+
+    padding:12px;
+
+    background:#E63946;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+}
+
+.contact-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#f8f8f8;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border-radius:10px;
+
+}
+
+.delete-btn{
+
+    background:red;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 15px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
 }
