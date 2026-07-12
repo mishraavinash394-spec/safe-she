@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Incident</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="report-container">
+
+<h1>📝 Report an Incident</h1>
+
+<form id="reportForm">
+
+<input type="text" id="name" placeholder="Your Name" required>
+
+<input type="text" id="locationInput" placeholder="Location" required>
+
+<select id="incident">
+
+<option>Harassment</option>
+
+<option>Stalking</option>
+
+<option>Domestic Violence</option>
+
+<option>Robbery</option>
+
+<option>Other</option>
+
+</select>
+
+<textarea id="description"
+placeholder="Describe the incident..."
+rows="6"></textarea>
+
+<button type="submit">
+Submit Report
+</button>
+
+</form>
+
+<p id="successMessage"></p>
+
+</div>
+
+<script src="js/report.js"></script>
+
+</body>
+</html>

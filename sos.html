@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SafeShe SOS</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="sos-container">
+
+<h1>🚨 Emergency SOS</h1>
+
+<p>
+If you are in danger, press the SOS button immediately.
+</p>
+
+<button id="sosButton" class="sos-btn">
+ACTIVATE SOS
+</button>
+
+<br><br>
+
+<button id="locationBtn" class="normal-btn">
+📍 Get My Location
+</button>
+
+<br><br>
+
+<button onclick="window.open('https://www.google.com/maps/search/police+station')"
+class="normal-btn">
+
+👮 Nearby Police
+
+</button>
+
+<br><br>
+
+<button onclick="window.open('https://www.google.com/maps/search/hospital')"
+class="normal-btn">
+
+🏥 Nearby Hospital
+
+</button>
+
+<div id="location"></div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
