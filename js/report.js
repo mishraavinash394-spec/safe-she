@@ -11,7 +11,7 @@ if (navigator.geolocation) {
     });
 
 }
-
+let imageData = "";
 const form = document.getElementById("reportForm");
 
 form.addEventListener("submit", function(e){
@@ -22,8 +22,10 @@ let report = {
     location: document.getElementById("locationInput").value,
     incident: document.getElementById("incident").value,
     description: document.getElementById("description").value,
-    date: new Date().toLocaleString()
+    date: new Date().toLocaleString(),
+    image: imageData
 };
+
 
 let reports =
 JSON.parse(localStorage.getItem("reports")) || [];
@@ -57,9 +59,19 @@ imageUpload.addEventListener("change", function () {
 
     if(file){
 
-        imagePreview.src = URL.createObjectURL(file);
+        const reader = new FileReader();
 
-        imagePreview.style.display = "block";
+        reader.onload = function(e){
+
+            imageData = e.target.result;
+
+            imagePreview.src = imageData;
+
+            imagePreview.style.display = "block";
+
+        };
+
+        reader.readAsDataURL(file);
 
     }
 
@@ -106,7 +118,16 @@ function displayReports() {
     <p><b>Description:</b> ${report.description}</p>
 
     <p><b>Date:</b> ${report.date}</p>
+${report.image ? `
+<br>
 
+<img src="${report.image}"
+style="
+width:200px;
+border-radius:10px;
+margin-top:10px;
+">
+` : ""}
     <button onclick="deleteReport(${index})">
         🗑 Delete
     </button>
