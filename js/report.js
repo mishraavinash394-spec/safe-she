@@ -30,3 +30,35 @@ document.getElementById("successMessage").innerHTML = `
 form.reset();
 
 });
+const imageUpload = document.getElementById("imageUpload");
+const imagePreview = document.getElementById("imagePreview");
+
+imageUpload.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if(file){
+
+        imagePreview.src = URL.createObjectURL(file);
+
+        imagePreview.style.display = "block";
+
+    }
+
+});
+const videoUpload = document.getElementById("videoUpload");
+const videoPreview = document.getElementById("videoPreview");
+
+videoUpload.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if(file){
+
+        videoPreview.src = URL.createObjectURL(file);
+
+        videoPreview.style.display = "block";
+
+    }
+
+});

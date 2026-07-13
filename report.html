@@ -38,7 +38,38 @@
 <textarea id="description"
 placeholder="Describe the incident..."
 rows="6"></textarea>
+<div class="upload-section">
 
+    <label><b>📷 Upload Image</b></label>
+
+    <input type="file"
+           id="imageUpload"
+           accept="image/*">
+
+    <br><br>
+
+    <img id="imagePreview"
+         style="max-width:250px; display:none; border-radius:10px;">
+
+    <br><br>
+
+    <label><b>🎥 Upload Video</b></label>
+
+    <input type="file"
+           id="videoUpload"
+           accept="video/*">
+
+    <br><br>
+
+    <video id="videoPreview"
+           width="300"
+           controls
+           style="display:none; border-radius:10px;">
+    </video>
+
+</div>
+
+<br>
 <button type="submit">
 Submit Report
 </button>
