@@ -17,6 +17,20 @@ const form = document.getElementById("reportForm");
 form.addEventListener("submit", function(e){
 
 e.preventDefault();
+let report = {
+    name: document.getElementById("name").value,
+    location: document.getElementById("locationInput").value,
+    incident: document.getElementById("incident").value,
+    description: document.getElementById("description").value,
+    date: new Date().toLocaleString()
+};
+
+let reports =
+JSON.parse(localStorage.getItem("reports")) || [];
+
+reports.push(report);
+
+localStorage.setItem("reports", JSON.stringify(reports));
 let currentDate = new Date();
 
 let dateTime = currentDate.toLocaleString();
@@ -26,7 +40,7 @@ document.getElementById("successMessage").innerHTML = `
 <br><br>
 📅 Report Time: ${dateTime}
 `;
-
+displayReports();
 form.reset();
 
 });
@@ -62,3 +76,38 @@ videoUpload.addEventListener("change", function () {
     }
 
 });
+displayReports();
+
+function displayReports() {
+
+    let reports =
+    JSON.parse(localStorage.getItem("reports")) || [];
+
+    let history =
+    document.getElementById("reportHistory");
+
+    history.innerHTML = "";
+
+    reports.forEach((report, index) => {
+
+        history.innerHTML += `
+            <div class="report-card">
+
+                <h3>${report.incident}</h3>
+
+                <p><b>Name:</b> ${report.name}</p>
+
+                <p><b>Location:</b> ${report.location}</p>
+
+                <p><b>Description:</b> ${report.description}</p>
+
+                <p><b>Date:</b> ${report.date}</p>
+
+            </div>
+
+            <br>
+        `;
+
+    });
+
+}
