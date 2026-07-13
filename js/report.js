@@ -42,7 +42,11 @@ document.getElementById("successMessage").innerHTML = `
 `;
 displayReports();
 form.reset();
+imagePreview.style.display = "none";
+imagePreview.src = "";
 
+videoPreview.style.display = "none";
+videoPreview.src = "";
 });
 const imageUpload = document.getElementById("imageUpload");
 const imagePreview = document.getElementById("imagePreview");
