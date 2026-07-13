@@ -56,3 +56,87 @@ document.getElementById("hospitalBtn").addEventListener("click", function (e) {
     window.open("https://www.google.com/maps/search/Hospital+Near+Me", "_blank");
 
 });
+let contacts =
+JSON.parse(localStorage.getItem("contacts")) || [];
+
+let reports =
+JSON.parse(localStorage.getItem("reports")) || [];
+
+document.getElementById("totalContacts").innerHTML =
+contacts.length;
+
+document.getElementById("totalReports").innerHTML =
+reports.length;
+
+// Safety Tips
+document.getElementById("tipsBtn").addEventListener("click", function () {
+
+    alert(
+`🚨 Women Safety Tips
+
+• Share your live location with trusted contacts.
+
+• Avoid isolated places at night.
+
+• Keep emergency contacts updated.
+
+• Stay alert and trust your instincts.
+
+• Use the SOS button in emergencies.`
+    );
+
+});
+
+// About SafeShe
+document.getElementById("aboutBtn").addEventListener("click", function () {
+
+    alert(
+`SafeShe
+
+Version 1.0
+
+Developed by:
+Avinash Mishra
+
+Women Safety Web Application`
+    );
+
+});
+
+// Settings
+document.getElementById("settingsBtn").addEventListener("click", function () {
+
+    alert("⚙️ Settings page will be available soon.");
+
+});
+
+// Dark Mode
+document.getElementById("darkModeBtn").addEventListener("click", function () {
+
+    document.body.classList.toggle("dark-mode");
+
+});
+const cards = document.querySelectorAll(".dash-card");
+
+cards.forEach((card,index)=>{
+
+card.style.opacity="0";
+
+setTimeout(()=>{
+
+card.style.opacity="1";
+
+card.style.transition=".5s";
+
+},index*150);
+
+});
+window.onload = function(){
+
+setTimeout(function(){
+
+document.getElementById("loader").style.display="none";
+
+},1500);
+
+};

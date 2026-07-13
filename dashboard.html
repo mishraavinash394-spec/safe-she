@@ -14,12 +14,72 @@
 
 <body>
 
+    <div id="loader">
+
+    <h1>🛡 SafeShe</h1>
+
+    <p>Loading...</p>
+
+</div>
+
 <div class="dashboard">
 
-<h1>Welcome, <span id="userName">User</span> 👋</h1>
+<h1>
+
+🛡 SafeShe
+
+<br>
+
+<span id="userName">User</span>
+
+</h1>
 
 <p>Your Safety Dashboard</p>
-<p>Your Safety Dashboard</p>
+
+<div class="stats-container">
+
+<div class="welcome-card">
+
+<h2>🛡 Stay Safe with SafeShe</h2>
+
+<p>
+
+Your trusted women safety platform.
+
+Quickly access SOS, report incidents,
+manage emergency contacts and find
+nearby help anytime.
+
+</p>
+
+</div>
+
+    <div class="stat-card">
+
+        <h2 id="totalContacts">0</h2>
+
+        <p>👥 Emergency Contacts</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2 id="totalReports">0</h2>
+
+        <p>📝 Reports Submitted</p>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h2>24×7</h2>
+
+        <p>🚨 SOS Ready</p>
+
+    </div>
+
+</div>
+
 <div class="dashboard-top">
 
     <button id="logoutBtn" class="logout-btn">
@@ -85,6 +145,46 @@
 
 <h2>Nearby Hospital</h2>
 
+<a href="#" class="dash-card" id="tipsBtn">
+
+💡
+
+<h2>Safety Tips</h2>
+
+<p>Women Safety Tips</p>
+
+</a>
+
+<a href="#" class="dash-card" id="settingsBtn">
+
+⚙️
+
+<h2>Settings</h2>
+
+<p>App Settings</p>
+
+</a>
+
+<a href="#" class="dash-card" id="darkModeBtn">
+
+🌙
+
+<h2>Dark Mode</h2>
+
+<p>Toggle Theme</p>
+
+</a>
+
+<a href="#" class="dash-card" id="aboutBtn">
+
+ℹ️
+
+<h2>About</h2>
+
+<p>About SafeShe</p>
+
+</a>
+
 <p>Find Nearby Hospital</p>
 
 </a>
@@ -92,6 +192,15 @@
 </div>
 
 </div>
+
+<footer class="footer">
+
+    <p>
+    © 2026 SafeShe | Women Safety Web Application
+    </p>
+
+</footer>
+
 <script src="js/dashboard.js"></script>
 
 </body>
