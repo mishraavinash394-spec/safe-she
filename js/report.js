@@ -91,23 +91,43 @@ function displayReports() {
     reports.forEach((report, index) => {
 
         history.innerHTML += `
-            <div class="report-card">
+<div class="report-card">
 
-                <h3>${report.incident}</h3>
+    <h3>${report.incident}</h3>
 
-                <p><b>Name:</b> ${report.name}</p>
+    <p><b>Name:</b> ${report.name}</p>
 
-                <p><b>Location:</b> ${report.location}</p>
+    <p><b>Location:</b> ${report.location}</p>
 
-                <p><b>Description:</b> ${report.description}</p>
+    <p><b>Description:</b> ${report.description}</p>
 
-                <p><b>Date:</b> ${report.date}</p>
+    <p><b>Date:</b> ${report.date}</p>
 
-            </div>
+    <button onclick="deleteReport(${index})">
+        🗑 Delete
+    </button>
 
-            <br>
-        `;
+</div>
+
+<br>
+`;
+        
 
     });
+
+}
+function deleteReport(index){
+
+    let reports =
+    JSON.parse(localStorage.getItem("reports")) || [];
+
+    reports.splice(index,1);
+
+    localStorage.setItem(
+        "reports",
+        JSON.stringify(reports)
+    );
+
+    displayReports();
 
 }
