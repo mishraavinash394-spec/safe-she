@@ -16,11 +16,25 @@
 
         <h2>Login</h2>
 
-        <input type="email" placeholder="Enter Email">
+        <input
+        type="email"
+        id="email"
+        placeholder="Enter Email"
+        required>
 
-        <input type="password" placeholder="Enter Password">
+        <div class="password-box">
 
-        <button>Login</button>
+            <input
+            type="password"
+            id="password"
+            placeholder="Enter Password"
+            required>
+
+            <span id="togglePassword">👁️</span>
+
+        </div>
+
+        <button id="loginBtn">Login</button>
 
         <p>
             Don't have an account?
@@ -30,6 +44,8 @@
     </div>
 
 </div>
+
 <script src="js/login.js"></script>
+
 </body>
 </html>

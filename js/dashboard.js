@@ -96,7 +96,10 @@ document.getElementById("aboutBtn").addEventListener("click", function () {
 Version 1.0
 
 Developed by:
-Avinash Mishra
+<p>
+Developed by 
+<b>Avinash Mishra & Jyoti Kumari</b>
+</p>
 
 Women Safety Web Application`
     );
@@ -140,3 +143,41 @@ document.getElementById("loader").style.display="none";
 },1500);
 
 };
+// ================= PROFILE PHOTO =================
+
+let profileUpload = document.getElementById("profileUpload");
+let profileImage = document.getElementById("profileImage");
+
+// Agar pehle se photo save hai to load karo
+let savedImage = localStorage.getItem("profileImage");
+
+if(savedImage){
+
+    profileImage.src = savedImage;
+
+}
+
+profileUpload.addEventListener("change", function(){
+
+    let file = this.files[0];
+
+    if(file){
+
+        let reader = new FileReader();
+
+        reader.onload = function(e){
+
+            profileImage.src = e.target.result;
+
+            localStorage.setItem(
+                "profileImage",
+                e.target.result
+            );
+
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+
+});

@@ -19,9 +19,32 @@
 
 <input type="email" id="email" placeholder="Email">
 
-<input type="password" id="password" placeholder="Password">
+<div class="password-box">
 
-<input type="password" id="confirmPassword" placeholder="Confirm Password">
+<input
+type="password"
+id="password"
+placeholder="Password"
+required>
+
+<span id="togglePassword">👁️</span>
+
+</div>
+
+<div class="password-box">
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+required>
+
+<span id="toggleConfirmPassword">👁️</span>
+
+</div>
+
+<p id="passwordStrength"></p>
+
 <button>Create Account</button>
 
 <p>
