@@ -12,6 +12,7 @@ if (navigator.geolocation) {
 
 }
 let imageData = "";
+let videoData = "";
 const form = document.getElementById("reportForm");
 
 form.addEventListener("submit", function(e){
@@ -23,7 +24,8 @@ let report = {
     incident: document.getElementById("incident").value,
     description: document.getElementById("description").value,
     date: new Date().toLocaleString(),
-    image: imageData
+    image: imageData,
+    video: videoData
 };
 
 
@@ -85,9 +87,19 @@ videoUpload.addEventListener("change", function () {
 
     if(file){
 
-        videoPreview.src = URL.createObjectURL(file);
+        const reader = new FileReader();
 
-        videoPreview.style.display = "block";
+        reader.onload = function(e){
+
+            videoData = e.target.result;
+
+            videoPreview.src = videoData;
+
+            videoPreview.style.display = "block";
+
+        };
+
+        reader.readAsDataURL(file);
 
     }
 
@@ -127,6 +139,19 @@ width:200px;
 border-radius:10px;
 margin-top:10px;
 ">
+` : ""}
+${report.video ? `
+<br><br>
+
+<video
+width="250"
+controls
+style="border-radius:10px;">
+
+<source src="${report.video}">
+
+</video>
+
 ` : ""}
     <button onclick="deleteReport(${index})">
         🗑 Delete
