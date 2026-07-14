@@ -1,3 +1,5 @@
+// ================= SOS =================
+
 const sosButton = document.getElementById("sosButton");
 
 if (sosButton) {
@@ -10,6 +12,8 @@ if (sosButton) {
 
 }
 
+// ================= LOCATION =================
+
 const locationBtn = document.getElementById("locationBtn");
 
 if (locationBtn) {
@@ -20,11 +24,15 @@ if (locationBtn) {
 
             navigator.geolocation.getCurrentPosition(function (position) {
 
-                document.getElementById("location").innerHTML =
+                const location = document.getElementById("location");
 
-                "Latitude : " + position.coords.latitude +
+                if(location){
 
-                "<br>Longitude : " + position.coords.longitude;
+                    location.innerHTML =
+                    "Latitude : " + position.coords.latitude +
+                    "<br>Longitude : " + position.coords.longitude;
+
+                }
 
             });
 
@@ -37,23 +45,28 @@ if (locationBtn) {
     });
 
 }
+
 // ================= MOBILE MENU =================
 
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
-menuToggle.addEventListener("click", function(){
+if(menuToggle && navLinks){
 
-    navLinks.classList.toggle("active");
+    menuToggle.addEventListener("click", function(){
 
-    if(navLinks.classList.contains("active")){
+        navLinks.classList.toggle("active");
 
-        menuToggle.innerHTML = "✖";
+        if(navLinks.classList.contains("active")){
 
-    }else{
+            menuToggle.innerHTML = "✖";
 
-        menuToggle.innerHTML = "☰";
+        }else{
 
-    }
+            menuToggle.innerHTML = "☰";
 
-});
+        }
+
+    });
+
+}
