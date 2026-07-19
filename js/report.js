@@ -16,6 +16,26 @@ if (navigator.geolocation) {
 // Global Variables
 let imageData = "";
 let videoData = "";
+let currentUser = null;
+
+// ================= FIREBASE AUTH =================
+
+firebase.auth().onAuthStateChanged(function(user){
+
+    if(user){
+
+        currentUser = user;
+
+    }else{
+
+        alert("Please login first.");
+
+        window.location.href = "login.html";
+
+    }
+
+});
+
 
 const form = document.getElementById("reportForm");
 const imageUpload = document.getElementById("imageUpload");
@@ -84,6 +104,10 @@ form.addEventListener("submit", function(e){
 
     let report = {
 
+        uid: currentUser.uid,
+
+        email: currentUser.email,
+
         name: document.getElementById("name").value,
 
         location: document.getElementById("locationInput").value,
@@ -92,165 +116,149 @@ form.addEventListener("submit", function(e){
 
         description: document.getElementById("description").value,
 
-        image: imageData,
-
-        video: videoData,
-
         date: new Date().toLocaleString()
 
     };
 
-    let reports =
-    JSON.parse(localStorage.getItem("reports")) || [];
+    firebase.firestore()
 
-    reports.push(report);
+    .collection("users")
 
-    localStorage.setItem(
-        "reports",
-        JSON.stringify(reports)
-    );
+    .doc(currentUser.uid)
 
-    document.getElementById("successMessage").innerHTML = `
-    ✅ Your report has been submitted successfully.
-    <br><br>
-    📅 ${new Date().toLocaleString()}
-    `;
+    .collection("reports")
 
-let toast = document.getElementById("toast");
+    .add(report)
 
-toast.style.display = "block";
+    .then(function(){
 
-setTimeout(function(){
+        document.getElementById("successMessage").innerHTML = `
+        ✅ Your report has been submitted successfully.
+        <br><br>
+        📅 ${new Date().toLocaleString()}
+        `;
 
-    toast.style.display = "none";
+        let toast = document.getElementById("toast");
 
-},3000);
+        toast.style.display = "block";
 
-    form.reset();
+        setTimeout(function(){
 
-    imagePreview.style.display = "none";
-    imagePreview.src = "";
+            toast.style.display = "none";
 
-    videoPreview.style.display = "none";
-    videoPreview.src = "";
+        },3000);
 
-    imageData = "";
-    videoData = "";
+        form.reset();
 
-    displayReports();
+        imagePreview.style.display = "none";
+        imagePreview.src = "";
+
+        videoPreview.style.display = "none";
+        videoPreview.src = "";
+
+        imageData = "";
+        videoData = "";
+
+        alert("✅ Report Submitted Successfully");
+
+    })
+
+    .catch(function(error){
+
+        alert(error.message);
+
+    });
 
 });
-
 
 // Display Reports
 function displayReports(){
 
-    let reports =
-    JSON.parse(localStorage.getItem("reports")) || [];
+    if(!currentUser){
+        return;
+    }
 
-    let history =
-    document.getElementById("reportHistory");
+    let history = document.getElementById("reportHistory");
 
-    let search =
-    document.getElementById("searchBox").value.toLowerCase();
+    let search = document.getElementById("searchBox").value.toLowerCase();
 
     history.innerHTML = "";
 
-    reports.forEach((report,index)=>{
+    firebase.firestore()
 
-        if(
+    .collection("users")
 
-            report.name.toLowerCase().includes(search)
+    .doc(currentUser.uid)
 
-            ||
+    .collection("reports")
 
-            report.incident.toLowerCase().includes(search)
+    .get()
 
-        ){
+    .then(function(snapshot){
 
-            history.innerHTML += `
+        snapshot.forEach(function(doc){
 
-            <div class="report-card"
-            style="
-            background:#fff;
-            padding:20px;
-            margin:20px 0;
-            border-radius:15px;
-            box-shadow:0 5px 15px rgba(0,0,0,.2);
-            ">
+            let report = doc.data();
 
-            <h3>${report.incident}</h3>
+            let reportId = doc.id;
 
-            <p><b>Name :</b> ${report.name}</p>
+            if(
 
-            <p><b>Location :</b> ${report.location}</p>
+                report.name.toLowerCase().includes(search)
 
-            <p><b>Description :</b> ${report.description}</p>
+                ||
 
-            <p><b>Date :</b> ${report.date}</p>
+                report.incident.toLowerCase().includes(search)
 
-            ${report.image ? `
-            <img
-            src="${report.image}"
-            style="
-            width:220px;
-            border-radius:10px;
-            margin-top:10px;
-            ">
-            ` : ""}
+            ){
 
-            ${report.video ? `
-            <br><br>
+                history.innerHTML += `
 
-            <video
-            width="250"
-            controls>
+                <div class="report-card"
+                style="
+                background:#fff;
+                padding:20px;
+                margin:20px 0;
+                border-radius:15px;
+                box-shadow:0 5px 15px rgba(0,0,0,.2);
+                ">
 
-            <source src="${report.video}">
+                <h3>${report.incident}</h3>
 
-            </video>
+                <p><b>Name :</b> ${report.name}</p>
 
-            ` : ""}
+                <p><b>Location :</b> ${report.location}</p>
 
-            <br><br>
+                <p><b>Description :</b> ${report.description}</p>
 
-            <button
-            onclick="editReport(${index})"
-            style="
-            background:#2196F3;
-            color:white;
-            padding:10px 18px;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-            margin-right:10px;
-            ">
-            ✏ Edit
-            </button>
+                <p><b>Date :</b> ${report.date}</p>
 
-            <button
-            onclick="deleteReport(${index})"
-            style="
-            background:red;
-            color:white;
-            padding:10px 18px;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-            ">
-            🗑 Delete
-            </button>
+                <button
+                onclick="deleteReport('${reportId}')"
+                style="
+                background:red;
+                color:white;
+                padding:10px 18px;
+                border:none;
+                border-radius:8px;
+                cursor:pointer;
+                ">
+                🗑 Delete
+                </button>
 
-            </div>
+                </div>
 
-            `;
+                `;
 
-        }
+            }
+
+        });
 
     });
 
 }
 
+    
 
 // Edit Report
 function editReport(index){
@@ -278,19 +286,39 @@ function editReport(index){
 
 
 // Delete Report
-function deleteReport(index){
+function deleteReport(reportId){
 
-    let reports =
-    JSON.parse(localStorage.getItem("reports")) || [];
+    let confirmDelete = confirm("Are you sure you want to delete this report?");
 
-    reports.splice(index,1);
+    if(!confirmDelete){
+        return;
+    }
 
-    localStorage.setItem(
-        "reports",
-        JSON.stringify(reports)
-    );
+    firebase.firestore()
 
-    displayReports();
+    .collection("users")
+
+    .doc(currentUser.uid)
+
+    .collection("reports")
+
+    .doc(reportId)
+
+    .delete()
+
+    .then(function(){
+
+        alert("✅ Report Deleted Successfully");
+
+        displayReports();
+
+    })
+
+    .catch(function(error){
+
+        alert(error.message);
+
+    });
 
 }
 

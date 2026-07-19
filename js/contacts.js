@@ -1,104 +1,158 @@
-let contacts =
-JSON.parse(localStorage.getItem("contacts")) || [];
+// ===============================
+// FIREBASE CONTACTS
+// ===============================
 
-displayContacts();
+let currentUser = null;
 
+// User Login Check
+auth.onAuthStateChanged(function(user){
+
+    if(user){
+
+        currentUser = user;
+
+        loadContacts();
+
+    }else{
+
+        window.location.href = "login.html";
+
+    }
+
+});
+
+// Save Contact
 function saveContact(){
 
-let name =
-document.getElementById("name").value;
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
 
-let phone =
-document.getElementById("phone").value;
+    if(name === "" || phone === ""){
 
-if(name=="" || phone==""){
+        alert("Please fill all fields.");
+        return;
 
-alert("Please fill all fields");
+    }
 
-return;
+    if(phone.length != 10){
 
-}
-if(phone.length != 10){
+        alert("Enter a valid 10 digit phone number.");
+        return;
 
-    alert("Please enter a valid 10-digit phone number");
+    }
 
-    return;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .collection("contacts")
+      .add({
 
-}
-let exists = contacts.find(contact => contact.phone === phone);
+          name: name,
+          phone: phone,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
 
-if(exists){
+      })
 
-    alert("This contact already exists.");
+      .then(function(){
 
-    return;
+          alert("✅ Contact Saved");
 
-}
-contacts.push({
+          document.getElementById("name").value = "";
+          document.getElementById("phone").value = "";
 
-name:name,
+          loadContacts();
 
-phone:phone
+      })
 
-});
+      .catch(function(error){
 
-localStorage.setItem("contacts",
-JSON.stringify(contacts));
+          alert(error.message);
 
-displayContacts();
-
-document.getElementById("name").value="";
-
-document.getElementById("phone").value="";
-
-}
-
-function displayContacts(){
-
-let list =
-document.getElementById("contactList");
-
-list.innerHTML="";
-
-contacts.forEach((contact,index)=>{
-
-list.innerHTML +=`
-
-<div class="contact-item">
-
-<div>
-
-<b>${contact.name}</b>
-
-<br>
-
-${contact.phone}
-
-</div>
-
-<button class="delete-btn"
-
-onclick="deleteContact(${index})">
-
-Delete
-
-</button>
-
-</div>
-
-`;
-
-});
+      });
 
 }
 
-function deleteContact(index){
+// Load Contacts
+function loadContacts(){
 
-contacts.splice(index,1);
+    let list = document.getElementById("contactList");
 
-localStorage.setItem("contacts",
-JSON.stringify(contacts));
+    list.innerHTML = "";
 
-displayContacts();
+    db.collection("users")
+      .doc(currentUser.uid)
+      .collection("contacts")
+      .get()
+
+      .then(function(snapshot){
+
+          snapshot.forEach(function(doc){
+
+              let contact = doc.data();
+
+              list.innerHTML += `
+
+              <div class="contact-item">
+
+                  <div>
+
+                      <b>${contact.name}</b><br>
+
+                      ${contact.phone}
+
+                  </div>
+
+                  <button
+                      class="delete-btn"
+                      onclick="deleteContact('${doc.id}')">
+
+                      Delete
+
+                  </button>
+
+              </div>
+
+              `;
+
+          });
+
+      });
+
+}
+
+// ===============================
+// Delete Contact
+// ===============================
+
+function deleteContact(id){
+
+    let confirmDelete = confirm(
+        "Are you sure you want to delete this contact?"
+    );
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+    db.collection("users")
+      .doc(currentUser.uid)
+      .collection("contacts")
+      .doc(id)
+      .delete()
+
+      .then(function(){
+
+          alert("✅ Contact Deleted Successfully");
+
+          loadContacts();
+
+      })
+
+      .catch(function(error){
+
+          alert(error.message);
+
+      });
 
 }

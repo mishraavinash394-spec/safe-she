@@ -1,35 +1,39 @@
-// Login Button
+// ================= LOGIN =================
 
 document.getElementById("loginBtn").addEventListener("click", function () {
 
     let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value;
 
-    let user = JSON.parse(localStorage.getItem("user"));
+    if (email === "" || password === "") {
 
-    if (!user) {
-
-        alert("No account found. Please register first.");
+        alert("Please fill all fields.");
         return;
 
     }
 
-    if (email === user.email && password === user.password) {
+    firebase.auth()
+
+    .signInWithEmailAndPassword(email, password)
+
+    .then(function(userCredential){
 
         alert("✅ Login Successful!");
 
         window.location.href = "dashboard.html";
 
-    } else {
+    })
 
-        alert("❌ Invalid Email or Password!");
+    .catch(function(error){
 
-    }
+        alert(error.message);
+
+    });
 
 });
 
 
-// Show / Hide Password
+// ================= SHOW / HIDE PASSWORD =================
 
 const togglePassword =
 document.getElementById("togglePassword");
@@ -37,18 +41,50 @@ document.getElementById("togglePassword");
 const passwordInput =
 document.getElementById("password");
 
-togglePassword.addEventListener("click", function () {
+togglePassword.addEventListener("click", function(){
 
-    if (passwordInput.type === "password") {
+    if(passwordInput.type === "password"){
 
         passwordInput.type = "text";
         togglePassword.innerHTML = "🙈";
 
-    } else {
+    }else{
 
         passwordInput.type = "password";
         togglePassword.innerHTML = "👁️";
 
     }
+
+});
+
+
+// ================= FORGOT PASSWORD =================
+
+document.getElementById("forgotPassword").addEventListener("click", function(){
+
+    let email = prompt("Enter your registered Email:");
+
+    if(email == ""){
+
+        alert("Please enter your Email.");
+        return;
+
+    }
+
+    firebase.auth()
+
+    .sendPasswordResetEmail(email)
+
+    .then(function(){
+
+        alert("✅ Password Reset Email Sent Successfully.\n\nPlease check your Email Inbox.");
+
+    })
+
+    .catch(function(error){
+
+        alert(error.message);
+
+    });
 
 });

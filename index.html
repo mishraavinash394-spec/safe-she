@@ -7,6 +7,7 @@
     <title>SafeShe</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/premium.css">
 </head>
 
 <body>
@@ -183,6 +184,37 @@
 
         </div>
 
+        <h3 style="margin-top:40px;">Send us a Message</h3>
+
+<input
+type="text"
+id="contactName"
+placeholder="Your Name">
+
+<br><br>
+
+<input
+type="email"
+id="contactEmail"
+placeholder="Your Email">
+
+<br><br>
+
+<textarea
+id="contactMessage"
+placeholder="Write your message..."
+rows="5"
+style="width:80%;max-width:500px;padding:10px;border-radius:8px;">
+</textarea>
+
+<br><br>
+
+<button id="sendMessageBtn">
+
+Send Message
+
+</button>
+
     </section>
 
     <!-- ================= FOOTER ================= -->
@@ -196,8 +228,15 @@
     </footer>
 
     <!-- IMPORTANT -->
-    <script src="js/script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase.js"></script>
+
+<script src="js/script.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,8 @@
-alert("Register JS Loaded");
-document.querySelector("button").addEventListener("click", function () {
+// ==============================
+// Register User
+// ==============================
+
+document.getElementById("registerBtn").addEventListener("click", function () {
 
     let name = document.getElementById("name").value.trim();
     let email = document.getElementById("email").value.trim();
@@ -7,35 +10,82 @@ document.querySelector("button").addEventListener("click", function () {
     let confirmPassword = document.getElementById("confirmPassword").value;
 
     if (name === "" || email === "" || password === "" || confirmPassword === "") {
+
         alert("Please fill all fields.");
         return;
+
     }
 
     if (password !== confirmPassword) {
+
         alert("Passwords do not match.");
         return;
+
     }
 
-    const user = {
-        name: name,
-        email: email,
-        password: password
-    };
+    firebase.auth()
 
-    localStorage.setItem("user", JSON.stringify(user));
+    .createUserWithEmailAndPassword(email, password)
 
-    alert("Registration Successful!");
+    .then(function(userCredential){
 
-    window.location.href = "login.html";
+        let user = userCredential.user;
+
+        firebase.firestore()
+
+        .collection("users")
+
+        .doc(user.uid)
+
+        .set({
+
+            name: name,
+            email: email,
+            createdAt: new Date()
+
+        })
+
+        .then(function(){
+
+            // Send Verification Email
+
+            user.sendEmailVerification()
+
+            .then(function(){
+
+                alert(
+`✅ Registration Successful!
+
+A verification email has been sent.
+
+Please verify your email before login.`
+                );
+
+                firebase.auth().signOut();
+
+                window.location.href = "login.html";
+
+            });
+
+        });
+
+    })
+
+    .catch(function(error){
+
+        alert(error.message);
+
+    });
 
 });
+
+
+// ==============================
 // Show / Hide Password
+// ==============================
 
-const togglePassword =
-document.getElementById("togglePassword");
-
-const password =
-document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+const password = document.getElementById("password");
 
 togglePassword.addEventListener("click", function(){
 
@@ -54,7 +104,9 @@ togglePassword.addEventListener("click", function(){
 });
 
 
+// ==============================
 // Show / Hide Confirm Password
+// ==============================
 
 const toggleConfirmPassword =
 document.getElementById("toggleConfirmPassword");
@@ -62,46 +114,55 @@ document.getElementById("toggleConfirmPassword");
 const confirmPassword =
 document.getElementById("confirmPassword");
 
-toggleConfirmPassword.addEventListener("click", function(){
+toggleConfirmPassword.addEventListener("click",function(){
 
-    if(confirmPassword.type === "password"){
+    if(confirmPassword.type==="password"){
 
-        confirmPassword.type = "text";
-        toggleConfirmPassword.innerHTML = "🙈";
+        confirmPassword.type="text";
+        toggleConfirmPassword.innerHTML="🙈";
 
     }else{
 
-        confirmPassword.type = "password";
-        toggleConfirmPassword.innerHTML = "👁️";
+        confirmPassword.type="password";
+        toggleConfirmPassword.innerHTML="👁️";
 
     }
 
 });
-const passwordInput = document.getElementById("password");
-const passwordStrength = document.getElementById("passwordStrength");
 
-passwordInput.addEventListener("input", function(){
 
-    let password = passwordInput.value;
+// ==============================
+// Password Strength
+// ==============================
 
-    if(password.length < 6){
+const passwordInput =
+document.getElementById("password");
 
-        passwordStrength.innerHTML = "🔴 Weak Password";
-        passwordStrength.style.color = "red";
+const passwordStrength =
+document.getElementById("passwordStrength");
+
+passwordInput.addEventListener("input",function(){
+
+    let value=passwordInput.value;
+
+    if(value.length<6){
+
+        passwordStrength.innerHTML="🔴 Weak Password";
+        passwordStrength.style.color="red";
 
     }
 
-    else if(password.length < 10){
+    else if(value.length<10){
 
-        passwordStrength.innerHTML = "🟡 Medium Password";
-        passwordStrength.style.color = "orange";
+        passwordStrength.innerHTML="🟡 Medium Password";
+        passwordStrength.style.color="orange";
 
     }
 
     else{
 
-        passwordStrength.innerHTML = "🟢 Strong Password";
-        passwordStrength.style.color = "green";
+        passwordStrength.innerHTML="🟢 Strong Password";
+        passwordStrength.style.color="green";
 
     }
 

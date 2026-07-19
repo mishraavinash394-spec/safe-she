@@ -1,0 +1,1293 @@
+/* ==========================================
+   SAFESHE PREMIUM UI - PART 1
+========================================== */
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    background:#f7f9fc;
+    color:#222;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+
+    position:sticky;
+    top:0;
+    z-index:999;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 8%;
+
+    background:rgba(10,38,71,.95);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+    font-size:30px;
+    font-weight:800;
+
+    color:#fff;
+
+    letter-spacing:1px;
+
+}
+
+.logo::before{
+
+    content:"🛡 ";
+
+}
+
+.nav-links{
+
+    display:flex;
+    gap:30px;
+    list-style:none;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    position:relative;
+
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-6px;
+
+    width:0%;
+
+    height:3px;
+
+    background:#ff4d6d;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#ffb3c1;
+
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+
+}
+
+/* Login Button */
+
+.login-btn{
+
+    background:linear-gradient(135deg,#ff4d6d,#ff758f);
+
+    padding:10px 22px;
+
+    border-radius:30px;
+
+    color:white !important;
+
+    box-shadow:0 8px 20px rgba(255,77,109,.35);
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 25px rgba(255,77,109,.5);
+
+}/* ==========================================
+   HERO SECTION
+========================================== */
+
+.hero{
+
+    min-height:90vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:60px 8%;
+
+    background:
+    linear-gradient(rgba(10,38,71,.75),rgba(10,38,71,.75)),
+    url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
+
+    background-size:cover;
+
+    background-position:center;
+
+    color:white;
+
+}
+
+.hero-text{
+
+    max-width:850px;
+
+    animation:fadeUp 1s ease;
+
+}
+
+.hero h1{
+
+    font-size:58px;
+
+    line-height:1.2;
+
+    margin-bottom:20px;
+
+    font-weight:800;
+
+}
+
+.hero p{
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    color:#f1f1f1;
+
+    margin-bottom:35px;
+
+}
+
+.hero-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.hero-btn{
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#ff4d6d,#ff758f);
+
+    color:white;
+
+    padding:16px 35px;
+
+    border-radius:40px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+    box-shadow:0 10px 25px rgba(255,77,109,.4);
+
+}
+
+.hero-btn:hover{
+
+    transform:translateY(-5px) scale(1.03);
+
+}
+
+.learn-btn{
+
+    text-decoration:none;
+
+    background:white;
+
+    color:#0A2647;
+
+    padding:16px 35px;
+
+    border-radius:40px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+.learn-btn:hover{
+
+    background:#f4f4f4;
+
+    transform:translateY(-5px);
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}@media(max-width:768px){
+
+.hero{
+
+padding:100px 25px;
+
+}
+
+.hero h1{
+
+font-size:36px;
+
+}
+
+.hero p{
+
+font-size:17px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+.hero-btn,
+.learn-btn{
+
+width:240px;
+
+text-align:center;
+
+}
+
+}/* ==========================================
+   ABOUT SECTION
+========================================== */
+
+.about{
+
+padding:90px 8%;
+
+text-align:center;
+
+background:white;
+
+}
+
+.about h2{
+
+font-size:42px;
+
+color:#0A2647;
+
+margin-bottom:20px;
+
+font-weight:700;
+
+}
+
+.about p{
+
+max-width:900px;
+
+margin:auto;
+
+font-size:18px;
+
+line-height:1.9;
+
+color:#555;
+
+}
+
+/* ==========================================
+   FEATURES
+========================================== */
+
+.features{
+
+padding:90px 8%;
+
+background:#f7f9fc;
+
+text-align:center;
+
+}
+
+.features h2{
+
+font-size:42px;
+
+color:#0A2647;
+
+margin-bottom:50px;
+
+}
+
+.feature-container{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:30px;
+
+}
+
+.card{
+
+background:white;
+
+padding:35px;
+
+border-radius:18px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+transition:.4s;
+
+cursor:pointer;
+
+}
+
+.card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.card h3{
+
+font-size:26px;
+
+margin-bottom:18px;
+
+color:#e91e63;
+
+}
+
+.card p{
+
+font-size:16px;
+
+line-height:1.7;
+
+color:#666;
+
+}
+
+/* Glow Border */
+
+.card::before{
+
+content:"";
+
+display:block;
+
+height:5px;
+
+width:70px;
+
+margin:auto;
+
+margin-bottom:20px;
+
+background:linear-gradient(90deg,#ff4d6d,#ff9f43);
+
+border-radius:20px;
+
+}/* ==========================================
+   EMERGENCY SECTION
+========================================== */
+
+.emergency{
+
+padding:90px 8%;
+
+text-align:center;
+
+background:linear-gradient(135deg,#ff4d6d,#e91e63);
+
+color:white;
+
+}
+
+.emergency h2{
+
+font-size:42px;
+
+margin-bottom:20px;
+
+font-weight:700;
+
+}
+
+.emergency p{
+
+font-size:20px;
+
+margin-bottom:35px;
+
+opacity:.95;
+
+}
+
+.emergency-btn{
+
+display:inline-block;
+
+padding:18px 40px;
+
+background:white;
+
+color:#e91e63;
+
+text-decoration:none;
+
+font-size:20px;
+
+font-weight:700;
+
+border-radius:50px;
+
+transition:.4s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+}
+
+.emergency-btn:hover{
+
+transform:translateY(-6px) scale(1.05);
+
+background:#fff5f7;
+
+}
+
+/* ==========================================
+   CONTACT
+========================================== */
+
+.contact{
+
+padding:90px 8%;
+
+background:#ffffff;
+
+text-align:center;
+
+}
+
+.contact h2{
+
+font-size:42px;
+
+color:#0A2647;
+
+margin-bottom:45px;
+
+}
+
+.contact-container{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:30px;
+
+}
+
+.contact-box{
+
+background:#f8f9ff;
+
+padding:35px;
+
+border-radius:18px;
+
+transition:.4s;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.contact-box:hover{
+
+transform:translateY(-10px);
+
+background:white;
+
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.contact-box h3{
+
+font-size:24px;
+
+margin-bottom:15px;
+
+color:#e91e63;
+
+}
+
+.contact-box p{
+
+font-size:17px;
+
+color:#666;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+footer{
+
+background:#0A2647;
+
+color:white;
+
+padding:35px 20px;
+
+text-align:center;
+
+}
+
+footer p{
+
+margin:10px 0;
+
+font-size:16px;
+
+opacity:.9;
+
+}/* ==========================================
+   ANIMATED LOGO
+========================================== */
+
+.logo{
+
+animation:logoFloat 3s ease-in-out infinite;
+
+text-shadow:0 0 10px rgba(255,255,255,.3);
+
+}
+
+@keyframes logoFloat{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}/* ==========================================
+   FLOATING SOS BUTTON
+========================================== */
+
+.hero-btn{
+
+animation:floatButton 2.5s ease-in-out infinite;
+
+}
+
+@keyframes floatButton{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}/* ==========================================
+   SCROLL ANIMATION
+========================================== */
+
+.hidden{
+
+opacity:0;
+
+transform:translateY(60px);
+
+transition:all .8s ease;
+
+}
+
+.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}/* ==========================================
+   PREMIUM DASHBOARD DESIGN
+========================================== */
+
+.dashboard-grid{
+
+    display:grid !important;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+    margin-top:35px;
+
+    align-items:stretch;
+
+}
+
+.dash-card{
+
+    min-height:180px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.10);
+
+    transition:.35s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:25px;
+
+}
+
+.dash-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 15px 35px rgba(233,30,99,.25);
+
+}
+
+.dash-card h2{
+
+    font-size:30px;
+
+    margin:10px 0;
+
+}
+
+.dash-card p{
+
+    font-size:16px;
+
+    color:#666;
+
+}
+
+.dashboard{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:30px;
+
+}
+
+.recent-sos{
+
+    margin-top:50px;
+
+}
+
+.footer{
+
+    margin-top:60px;
+
+}
+
+/* Mobile */
+
+@media(max-width:992px){
+
+.dashboard-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:650px){
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}/* SETTINGS */
+
+.settings-container{
+
+max-width:500px;
+
+margin:60px auto;
+
+padding:20px;
+
+}
+
+.settings-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+text-align:center;
+
+}
+
+.settings-profile{
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:4px solid hotpink;
+
+margin-bottom:20px;
+
+}
+
+.settings-card button{
+
+width:100%;
+
+padding:15px;
+
+margin-top:15px;
+
+border:none;
+
+border-radius:10px;
+
+font-size:17px;
+
+cursor:pointer;
+
+background:#e91e63;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.settings-card button:hover{
+
+background:#c2185b;
+
+}.dark-mode{
+
+background:#121212;
+
+color:white;
+
+}
+
+.dark-mode .settings-card{
+
+background:#222;
+
+color:white;
+
+}/* ===============================
+   PREMIUM DASHBOARD BACKGROUND
+================================= */
+
+body{
+
+    background:linear-gradient(135deg,#ffe6f0,#f3e8ff,#e8f4ff);
+
+    min-height:100vh;
+
+}
+
+.dashboard{
+
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+    margin:30px auto;
+
+}/* ===== Premium Dashboard Background ===== */
+
+body{
+
+    background: linear-gradient(135deg,#ffe5ec,#f3e8ff,#dbeafe) !important;
+
+    background-attachment: fixed;
+
+}
+
+.dashboard{
+
+    background: rgba(255,255,255,0.85) !important;
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    border-radius:25px;
+
+    padding:30px;
+
+    margin:30px auto;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+}/* ======================================
+      PREMIUM GLASS DASHBOARD
+====================================== */
+
+body{
+
+background:linear-gradient(135deg,#ffe4ef,#f3e8ff,#dceeff) !important;
+
+background-attachment:fixed;
+
+font-family:'Segoe UI',sans-serif;
+
+}
+
+.dashboard{
+
+background:rgba(255,255,255,.88) !important;
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+border-radius:25px;
+
+padding:35px;
+
+margin:30px auto;
+
+max-width:1450px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+border:1px solid rgba(255,255,255,.4);
+
+}
+
+.profile-section{
+
+text-align:center;
+
+margin-bottom:25px;
+
+}
+
+#profileImage{
+
+width:140px;
+
+height:140px;
+
+border-radius:50%;
+
+border:5px solid #ff4f8b;
+
+box-shadow:0 10px 25px rgba(255,79,139,.4);
+
+transition:.4s;
+
+}
+
+#profileImage:hover{
+
+transform:scale(1.06);
+
+}
+
+.dashboard h1{
+
+font-size:40px;
+
+font-weight:bold;
+
+color:#1e293b;
+
+}
+
+.dashboard p{
+
+color:#666;
+
+}
+
+.stat-card{
+
+background:linear-gradient(135deg,#ffffff,#fff4fa);
+
+border-radius:20px;
+
+padding:22px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.10);
+
+transition:.35s;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 15px 30px rgba(233,30,99,.25);
+
+}
+
+.stat-card h2{
+
+font-size:34px;
+
+color:#e91e63;
+
+}
+
+.stat-card p{
+
+font-size:15px;
+
+font-weight:600;
+
+}
+
+.dash-card{
+
+background:white;
+
+border-radius:22px;
+
+padding:28px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.10);
+
+transition:.35s;
+
+}
+
+.dash-card:hover{
+
+transform:translateY(-10px);
+
+background:#fff6fb;
+
+box-shadow:0 15px 35px rgba(233,30,99,.28);
+
+}
+
+.logout-btn{
+
+background:#ff3b6d;
+
+border:none;
+
+padding:14px 28px;
+
+color:white;
+
+border-radius:10px;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+background:#d81b60;
+
+transform:scale(1.05);
+
+}
+
+.footer{
+
+background:transparent;
+
+font-weight:bold;
+
+color:#555;
+
+margin-top:50px;
+
+}.welcome-banner{
+
+margin:20px auto;
+
+padding:18px;
+
+text-align:center;
+
+background:linear-gradient(90deg,#ff6fa5,#b16cff);
+
+color:white;
+
+font-size:20px;
+
+font-weight:bold;
+
+border-radius:15px;
+
+box-shadow:0 10px 25px rgba(177,108,255,.3);
+
+animation:glow 2s infinite alternate;
+
+}
+
+@keyframes glow{
+
+from{
+
+transform:scale(1);
+
+}
+
+to{
+
+transform:scale(1.02);
+
+}
+
+} 
+/* ===============================
+   DASHBOARD INFO
+================================= */
+
+.dashboard-info{
+
+text-align:center;
+
+margin:20px auto;
+
+padding:20px;
+
+background:rgba(255,255,255,.75);
+
+border-radius:18px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:0 10px 25px rgba(0,0,0,.10);
+
+}
+
+.dashboard-info h2{
+
+font-size:30px;
+
+color:#e91e63;
+
+margin-bottom:10px;
+
+}
+
+.dashboard-info p{
+
+font-size:18px;
+
+color:#444;
+
+margin:5px 0;
+
+font-weight:600;
+
+}/* ==========================
+   SAFETY SCORE
+========================== */
+
+.safety-score{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+margin:25px 0;
+
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+text-align:center;
+
+}
+
+.safety-score h2{
+
+color:#e91e63;
+
+margin-bottom:15px;
+
+}
+
+.progress{
+
+width:100%;
+
+height:28px;
+
+background:#eee;
+
+border-radius:50px;
+
+overflow:hidden;
+
+}
+
+.progress-bar{
+
+height:100%;
+
+width:90%;
+
+background:linear-gradient(90deg,#00c853,#4caf50);
+
+color:white;
+
+font-weight:bold;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+transition:.5s;
+
+}
+
+#safeStatus{
+
+margin-top:15px;
+
+font-size:18px;
+
+font-weight:bold;
+
+}

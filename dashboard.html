@@ -3,12 +3,14 @@
 
 <head>
 
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard</title>
 
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/premium.css">
 
 </head>
 
@@ -27,9 +29,9 @@
 <div class="profile-section">
 
     <img
-        id="profileImage"
-        src="https://via.placeholder.com/120"
-        alt="Profile">
+id="profileImage"
+src="images/default-profile.png"
+alt="Profile">
 
     <br><br>
 
@@ -47,12 +49,57 @@
 <br>
 
 <span id="userName">User</span>
+<br><br>
+
+<button id="editProfileBtn" class="edit-btn">
+
+✏️ Edit Profile
+
+</button>
 
 </h1>
 
 <p>Your Safety Dashboard</p>
 
+<div class="dashboard-info">
+
+<h2 id="greeting">👋 Welcome</h2>
+
+<p id="currentDate"></p>
+
+<p id="currentTime"></p>
+
+</div>
+
+<div class="welcome-banner">
+
+🌸 Stay Safe • Stay Strong • SafeShe Protects You 💖
+
+</div>
+
 <div class="stats-container">
+
+    <div class="safety-score">
+
+<h2>🛡 Safety Score</h2>
+
+<div class="progress">
+
+<div class="progress-bar" id="progressBar">
+
+90%
+
+</div>
+
+</div>
+
+<p id="safeStatus">
+
+Status : ✅ SAFE
+
+</p>
+
+</div>
 
 <div class="welcome-card">
 
@@ -94,7 +141,21 @@ nearby help anytime.
 
     </div>
 
+<div class="stat-card">
+
+    <h2 id="totalSOS">0</h2>
+
+    <p>🚨 Total SOS Sent</p>
+
 </div>
+<div class="stat-card">
+
+    <h2 id="todaySOS">0</h2>
+
+    <p>📅 Today's SOS</p>
+
+</div>
+</div> <!-- stats-container -->
 
 <div class="dashboard-top">
 
@@ -161,6 +222,10 @@ nearby help anytime.
 
 <h2>Nearby Hospital</h2>
 
+<p>Find Nearby Hospital</p>
+
+</a>
+
 <a href="#" class="dash-card" id="tipsBtn">
 
 💡
@@ -170,8 +235,7 @@ nearby help anytime.
 <p>Women Safety Tips</p>
 
 </a>
-
-<a href="#" class="dash-card" id="settingsBtn">
+<a href="settings.html" class="dash-card">
 
 ⚙️
 
@@ -191,6 +255,25 @@ nearby help anytime.
 
 </a>
 
+<a href="history.html" class="dash-card">
+
+📜
+
+<h2>SOS History</h2>
+
+<p>View Emergency History</p>
+
+</a>
+<a href="emergency.html" class="dash-card">
+
+📞
+
+<h2>Emergency Numbers</h2>
+
+<p>Important Helplines</p>
+
+</a>
+
 <a href="#" class="dash-card" id="aboutBtn">
 
 ℹ️
@@ -201,14 +284,59 @@ nearby help anytime.
 
 </a>
 
-<p>Find Nearby Hospital</p>
 
-</a>
+</div>
+
+</div>
+<!-- ================= RECENT SOS ================= -->
+
+<div class="recent-sos">
+
+<h2>🚨 Recent SOS Activity</h2>
+
+<div id="recentSOS">
+
+<p>Loading...</p>
 
 </div>
 
 </div>
 
+<!-- ================= Edit Profile Popup ================= -->
+
+<div id="editProfileModal" class="modal" style="display:none;">
+
+<div class="modal-content">
+
+<h2>Edit Profile</h2>
+
+<input
+type="text"
+id="editName"
+placeholder="Enter Name">
+
+<input
+type="text"
+id="editPhone"
+placeholder="Enter Phone Number">
+
+<br><br>
+
+<button id="saveProfileBtn">
+
+Save Changes
+
+</button>
+
+<button id="closeProfileBtn">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
 <footer class="footer">
 
     <p>
@@ -217,8 +345,15 @@ nearby help anytime.
 
 </footer>
 
-<script src="js/dashboard.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase.js"></script>
+
+<script src="js/dashboard.js"></script>
 </body>
 
 </html>
